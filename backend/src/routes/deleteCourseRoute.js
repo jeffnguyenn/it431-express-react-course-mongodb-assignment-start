@@ -1,29 +1,21 @@
-//delete a course
-
-// Compare this snippet from backend/src/routes/deleteCourseRoute.js:
-import { courseData } from "../courseData";
+import { getDbConnection } from '../db';
+import { ObjectId } from 'mongodb';
 
 export const deleteCourseRoute = {
     path: '/api/course/:id',
     method: 'delete',
-    handler: (req, res) => {
-        const id = req.params.id;
-        const course = courseData.find((course) => course.id === parseInt(id));
+    handler: async (req, res) => {
+        const id = parseInt(req.params.id);
+        const query = { "_id": id };
+        const db = getDbConnection('courses');
+        const existingCourse = await db.collection('courses').findOne(query);
 
-        if (!course) {
-            res.status(404).json({
-                message: 'Course not found'
-
-            });
+        if (existingCourse) {
+            const result = await db.collection('courses').deleteOne(query);
+            res.status(200).send('Course deleted')
+        } else {
+            res.status(404).send('Course not found');
         }
-
-        const index = courseData.indexOf(course);
-        console.log(index);
-        console.log(course);
-        courseData.splice(index, 1);
-        res.status(200).json({
-            message: 'Course deleted successfully'
-        });
     }
 };
 

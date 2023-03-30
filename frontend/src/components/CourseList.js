@@ -11,7 +11,7 @@ const CourseList = () => {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/course`)
+        fetch(`http://127.0.0.1:8080/api/course`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -43,7 +43,7 @@ const CourseList = () => {
                                 <Card.Text as="h3">
                                     {course.estimatedTime}
                                 </Card.Text>
-                                <LinkContainer to={`/courses/${course.id}`}>
+                                <LinkContainer to={`/courses/${course._id}`}>
                                     <Button variant="primary">View Course</Button>
                                 </LinkContainer>
                             </Card>

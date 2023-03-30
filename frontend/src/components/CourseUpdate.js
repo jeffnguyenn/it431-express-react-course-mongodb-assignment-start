@@ -14,7 +14,7 @@ const CourseUpdate = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch(`${process.env.REACT_APP_API_URL}/api/course/${id}`, {
+        fetch(`http://127.0.0.1:8080/api/course/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const CourseUpdate = () => {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/course/${id}`)
+        fetch(`http://127.0.0.1:8080/api/course/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);

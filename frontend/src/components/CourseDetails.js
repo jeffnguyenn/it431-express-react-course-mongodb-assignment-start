@@ -15,7 +15,7 @@ const CourseDetails = () => {
 
     const handleDelete = (event) => {
         event.preventDefault();
-        fetch(`${process.env.REACT_APP_API_URL}/api/course/${id}`, {
+        fetch(`http://127.0.0.1:8080/api/course/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const CourseDetails = () => {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/course/${id}`)
+        fetch(`http://127.0.0.1:8080/api/course/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
