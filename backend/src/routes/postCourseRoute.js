@@ -7,7 +7,7 @@ export const postCourseRoute = {
 
         const db = getDbConnection('courses')
         const result = await db.collection('courses').insertOne(req.body);
-        const insertedCourse = await db.collection('courses').findOne({ "_id": result.insertedId });
+        const insertedCourse = await db.collection('courses').findOne({ _id: result.insertedId });
 
         console.log(result);
         res.status(201).json({

@@ -5,8 +5,9 @@ export const deleteCourseRoute = {
     path: '/api/course/:id',
     method: 'delete',
     handler: async (req, res) => {
-        const id = parseInt(req.params.id);
-        const query = { "_id": id };
+        const id = req.params.id;
+        const query = { "_id": new ObjectId(id) };
+        
         const db = getDbConnection('courses');
         const existingCourse = await db.collection('courses').findOne(query);
 
